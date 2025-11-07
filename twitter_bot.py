@@ -41,8 +41,8 @@ def create_countdown_image():
     # Gradient background (Pink to Purple - Vice City style)
     for y in range(1080):
         r = int(230 - (y * 90 / 1080))
-        g = int(100 - (y * 40 / 1080))
-        b = int(180 + (y * 40 / 1080))
+        g = int(80 - (y * 40 / 1080))
+        b = int(200 + (y * 40 / 1080))
         draw.line([(0, y), (1080, y)], fill=(r, g, b))
     
     progress = calculate_progress()
@@ -53,7 +53,7 @@ def create_countdown_image():
         try:
             large_font = ImageFont.truetype(font_name, 70)
             medium_font = ImageFont.truetype(font_name, 50)
-            small_font = ImageFont.truetype(font_name, 42)
+            small_font = ImageFont.truetype(font_name, 50)
             fonts_loaded = True
             print(f"✅ Loaded Pricedown font: {font_name}")
             break
@@ -88,7 +88,7 @@ def create_countdown_image():
         gta_logo = gta_logo.resize((logo_width, logo_height), Image.Resampling.LANCZOS)
         
         logo_x = (1080 - logo_width) // 2
-        logo_y = 180
+        logo_y = 160
         img.paste(gta_logo, (logo_x, logo_y), gta_logo)
         gta_logo_loaded = True
         print("✅ GTA VI logo loaded")
@@ -124,10 +124,10 @@ def create_countdown_image():
         draw.rectangle([bar_x + 10, bar_y + 10, bar_x + 10 + fill_width, bar_y + bar_height - 10],
                       fill='#FF9A7A')
     
-    draw.text((540, 835), f"{progress['percentage']}%", font=large_font, fill='white', anchor='mm')
+    draw.text((540, 760), f"{progress['percentage']}%", font=large_font, fill='white', anchor='mm')
     draw.text((540, 940), f"{progress['days_remaining']} DAYS REMAINING", font=small_font, fill='white', anchor='mm')
     draw.text((540, 10005), "COMING", font=medium_font, fill='white', anchor='mm')
-    draw.text((540, 1050), "NOVEMBER 19, 2026", font=small_font, fill='white', anchor='mm')
+    draw.text((540, 870), "NOVEMBER 19, 2026", font=small_font, fill='white', anchor='mm')
     
     rockstar_logo_loaded = False
     try:
@@ -191,4 +191,5 @@ def post_to_twitter():
 if __name__ == "__main__":
     print("🚀 GTA VI TWITTER BOT - GitHub Actions")
     post_to_twitter()
+
 
