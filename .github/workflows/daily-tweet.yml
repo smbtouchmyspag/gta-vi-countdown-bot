@@ -2,7 +2,7 @@ name: Daily GTA VI Countdown Tweet
 
 on:
   schedule:
-    - cron: '42 14 * * *'  # Runs at 14:00 AM UTC every day
+    - cron: '50 14 * * *'  # Runs at 14:00 AM UTC every day
   workflow_dispatch:  # Allows manual trigger for testing
 
 jobs:
