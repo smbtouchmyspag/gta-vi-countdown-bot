@@ -1,8 +1,9 @@
+# Activated: November 7, 2025
 name: Daily GTA VI Countdown Tweet
 
 on:
   schedule:
-    - cron: '50 14 * * *'  # Your time (example: 4:50 PM EET = 14:50 UTC)
+    - cron: '58 14 * * *'  # Your time (example: 4:50 PM EET = 14:50 UTC)
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
