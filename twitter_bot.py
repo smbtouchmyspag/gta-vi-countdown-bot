@@ -126,7 +126,7 @@ def create_countdown_image():
     
     draw.text((540, 835), f"{progress['percentage']}%", font=large_font, fill='white', anchor='mm')
     draw.text((540, 940), f"{progress['days_remaining']} DAYS REMAINING", font=small_font, fill='white', anchor='mm')
-    draw.text((540, 1005), "COMING", font=medium_font, fill='white', anchor='mm')
+    draw.text((540, 10005), "COMING", font=medium_font, fill='white', anchor='mm')
     draw.text((540, 1050), "NOVEMBER 19, 2026", font=small_font, fill='white', anchor='mm')
     
     rockstar_logo_loaded = False
@@ -191,3 +191,4 @@ def post_to_twitter():
 if __name__ == "__main__":
     print("🚀 GTA VI TWITTER BOT - GitHub Actions")
     post_to_twitter()
+
