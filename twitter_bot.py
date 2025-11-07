@@ -54,6 +54,7 @@ def create_countdown_image():
             large_font = ImageFont.truetype(font_name, 70)
             medium_font = ImageFont.truetype(font_name, 50)
             small_font = ImageFont.truetype(font_name, 50)
+            supersmall_font = ImageFont.truetype(font_name, 24)
             fonts_loaded = True
             print(f"✅ Loaded Pricedown font: {font_name}")
             break
@@ -67,6 +68,7 @@ def create_countdown_image():
                 large_font = ImageFont.truetype(font_name, 70)
                 medium_font = ImageFont.truetype(font_name, 50)
                 small_font = ImageFont.truetype(font_name, 42)
+                supersmall_font = ImageFont.truetype(font_name, 24)
                 fonts_loaded = True
                 print(f"✅ Loaded font: {font_name}")
                 break
@@ -78,7 +80,7 @@ def create_countdown_image():
         large_font = ImageFont.load_default()
         medium_font = ImageFont.load_default()
         small_font = ImageFont.load_default()
-    
+        supersmall_font = ImageFont.load_default()
     # Try to load GTA VI logo
     gta_logo_loaded = False
     try:
@@ -128,6 +130,9 @@ def create_countdown_image():
     draw.text((540, 940), f"{progress['days_remaining']} DAYS REMAINING", font=small_font, fill='white', anchor='mm')
     draw.text((540, 10005), "COMING", font=medium_font, fill='white', anchor='mm')
     draw.text((540, 870), "NOVEMBER 19, 2026", font=small_font, fill='white', anchor='mm')
+    
+    # Twitter handle watermark (subtle - blends with gradient)
+    draw.text((20, 1060), "@gta6countdown26", font=supersmall_font, fill='#B080C8', anchor='lm')
     
     rockstar_logo_loaded = False
     try:
@@ -191,6 +196,7 @@ def post_to_twitter():
 if __name__ == "__main__":
     print("🚀 GTA VI TWITTER BOT - GitHub Actions")
     post_to_twitter()
+
 
 
 
