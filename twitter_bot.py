@@ -117,12 +117,12 @@ def create_countdown_image():
     
     for i in range(6):
         draw.rectangle([bar_x - i, bar_y - i, bar_x + bar_width + i, bar_y + bar_height + i],
-                      outline='#7B5FA8', width=1)
+                      outline='#FFFFFF', width=1)
     
     fill_width = int((bar_width - 20) * (progress['percentage'] / 100))
     if fill_width > 0:
         draw.rectangle([bar_x + 10, bar_y + 10, bar_x + 10 + fill_width, bar_y + bar_height - 10],
-                      fill='#FF9A7A')
+                      fill='#FF69B4')
     
     draw.text((540, 760), f"{progress['percentage']}%", font=large_font, fill='white', anchor='mm')
     draw.text((540, 940), f"{progress['days_remaining']} DAYS REMAINING", font=small_font, fill='white', anchor='mm')
@@ -191,5 +191,6 @@ def post_to_twitter():
 if __name__ == "__main__":
     print("🚀 GTA VI TWITTER BOT - GitHub Actions")
     post_to_twitter()
+
 
 
