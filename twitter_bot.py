@@ -1,6 +1,7 @@
 import tweepy
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
+import requests
 import os
 
 # ============================================
@@ -16,6 +17,36 @@ ACCESS_TOKEN_SECRET = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
 # ============================================
 RELEASE_DATE = datetime(2026, 11, 19)
 START_DATE = datetime(2025, 11, 6)
+
+def notify_discord_webhook(tweet_url, days_remaining, percentage):
+    webhook_url = os.environ.get('DISCORD_WEBHOOK_URL')
+    if not webhook_url:
+        print("Discord webhook not set")
+        return
+    embed = {
+        "title": "🚀 GTA VI Countdown Posted!",
+        "description": (
+            f"[Click to view tweet]({tweet_url})\n\n"
+            f"⏳ **{days_remaining} days remaining**\n"
+            f"📊 **Progress:** {percentage}%\n"
+            "Posted automatically by the countdown bot."
+        ),
+        "color": 0xea4fff,  # Vice City pink
+        "footer": {"text": "Made with ❤️ by @gtacountdown26"}
+    }
+    payload = {
+        "content": "",  # You can put a mention or keep empty
+        "embeds": [embed]
+    }
+    try:
+        resp = requests.post(webhook_url, json=payload)
+        if resp.status_code in [200, 204]:
+            print("✅ Sent notification to Discord")
+        else:
+            print(f"❌ Discord webhook error {resp.status_code}: {resp.text}")
+    except Exception as e:
+        print(f"❌ Failed to notify Discord: {e}")
+
 
 def calculate_progress():
     """Calculate progress with correct day counting"""
@@ -185,6 +216,16 @@ def post_to_twitter():
         print("🐦 Posting tweet...")
         response = client.create_tweet(text=tweet_text, media_ids=[media.media_id])
         
+        twitter_url = f"https://twitter.com/user/status/{response.data['id']}"
+
+        # After posting, notify Discord with details
+        notify_discord_webhook(
+            twitter_url,
+            progress['days_remaining'],
+            progress['percentage']
+        )
+
+        
         print("\n✅ SUCCESSFULLY POSTED!")
         print(f"🔗 https://twitter.com/user/status/{response.data['id']}")
         
@@ -196,6 +237,7 @@ def post_to_twitter():
 if __name__ == "__main__":
     print("🚀 GTA VI TWITTER BOT - GitHub Actions")
     post_to_twitter()
+
 
 
 
