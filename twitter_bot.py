@@ -11,7 +11,7 @@ API_KEY = os.environ.get('TWITTER_API_KEY')
 API_SECRET = os.environ.get('TWITTER_API_SECRET')
 ACCESS_TOKEN = os.environ.get('TWITTER_ACCESS_TOKEN')
 ACCESS_TOKEN_SECRET = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
-
+TWITTER_USERNAME = "gta6countdown26"  # Set your handle here
 # ============================================
 # GTA VI COUNTDOWN SETTINGS
 # ============================================
@@ -215,8 +215,8 @@ def post_to_twitter():
         
         print("🐦 Posting tweet...")
         response = client.create_tweet(text=tweet_text, media_ids=[media.media_id])
-        
-        twitter_url = f"https://twitter.com/user/status/{response.data['id']}"
+ 
+        twitter_url = f"https://twitter.com/{TWITTER_USERNAME}/status/{response.data['id']}"
 
         # After posting, notify Discord with details
         notify_discord_webhook(
@@ -230,6 +230,16 @@ def post_to_twitter():
         print(f"🔗 https://twitter.com/user/status/{response.data['id']}")
         
     except Exception as e:
+        error_message = f"❌ GTA VI BOT POST FAILED!\nError: {e}"
+        # Send a Discord notification for failures
+        # The discord webhook will just use error_message in the description (or as content)
+        webhook_url = os.environ.get('DISCORD_WEBHOOK_URL')
+        if webhook_url:
+            payload = {"content": error_message}
+            try:
+                requests.post(webhook_url, json=payload)
+            except Exception as err:
+                print(f"❌ Failed to notify Discord of error: {err}")
         print(f"\n❌ Error: {e}")
         import traceback
         traceback.print_exc()
@@ -237,6 +247,7 @@ def post_to_twitter():
 if __name__ == "__main__":
     print("🚀 GTA VI TWITTER BOT - GitHub Actions")
     post_to_twitter()
+
 
 
 
