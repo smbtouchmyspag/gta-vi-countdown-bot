@@ -1,6 +1,6 @@
 import tweepy
 from PIL import Image, ImageDraw, ImageFont
-from datetime import datetim
+from datetime import datetime
 import requests
 import os
 
@@ -247,6 +247,7 @@ def post_to_twitter():
 if __name__ == "__main__":
     print("🚀 GTA VI TWITTER BOT - GitHub Actions")
     post_to_twitter()
+
 
 
 
