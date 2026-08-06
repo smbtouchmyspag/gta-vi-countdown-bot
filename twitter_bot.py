@@ -1,4 +1,4 @@
-import tweepy
+import tweep
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
 import requests
